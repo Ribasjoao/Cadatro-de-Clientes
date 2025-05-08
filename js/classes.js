@@ -1,8 +1,9 @@
 // Classe que representa um cliente/tarefa
-export class cliente {
-  constructor(id, nome) {
+export class Cliente {
+  constructor(id, nome, email) {
     this._id = id;
     this.nome = nome;
+    this.email = email;
   }
 }
 
@@ -13,18 +14,18 @@ export class ClienteAPI {
   }
 
   // Método para carregar clientes da API
-  carregarCliente() {
+  carregarClientes() {
     return fetch(this.API_URL).then((resposta) => resposta.json());
   }
 
   // Método para adicionar um cliente
-  adicionarCliente(nome) {
+  adicionarCliente(nome, email) {
     return fetch(this.API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ nome: nome }),
+      body: JSON.stringify({ nome, email }),
     }).then((resposta) => resposta.json());
   }
 

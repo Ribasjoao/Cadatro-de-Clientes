@@ -4,7 +4,7 @@ import { criarElementoCliente, limparInput } from "./utils.js";
 
 // URL base da API do CrudCrud (a mesma do seu código original)
 const API_URL =
-  "https://crudcrud.com/api/cea78fe0f2154430878361753fb30630/clientes";
+  "https://crudcrud.com/api/c61a52c6e5964577932a02dafea2688f/clientes";
 
 // Inicializando a API de clientes
 const clienteAPI = new ClienteAPI(API_URL);
@@ -38,16 +38,21 @@ function removerCliente(id) {
 
 // Função para adicionar um novo cliente
 function adicionarCliente() {
-  // Pega o nome que o usuário adicionou no input
-  const nome = document.getElementById("tarefa").value;
+  const nome = document.getElementById("nome").value;
+  const email = document.getElementById("email").value;
 
-  // Usa a classe ClienteAPI para adicionar o cliente
-  clienteAPI.adicionarCliente(nome).then((cliente) => {
-    // Cria um novo elemento de lista para o cliente adicionado
+  if (!nome || !email) {
+    document.getElementById("error-message").textContent =
+      "Por favor, preencha todos os campos";
+    return;
+  }
+
+  clienteAPI.adicionarCliente(nome, email).then((cliente) => {
     const item = criarElementoCliente(cliente, removerCliente);
     clientes.appendChild(item);
-    // Limpa o campo de input
-    limparInput("tarefa");
+    limparInput("nome");
+    limparInput("email");
+    document.getElementById("error-message").textContent = "";
   });
 }
 

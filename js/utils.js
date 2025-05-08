@@ -1,8 +1,7 @@
 export function criarElementoCliente(cliente, removerCallback) {
   const item = document.createElement("li");
-  item.innerHTML = `${cliente.nome} <button id="btn-${cliente._id}">X</button>`;
+  item.innerHTML = `${cliente.nome} (${cliente.email}) <button id="btn-${cliente._id}">X</button>`;
 
-  // Adiciona o event listener no botão após criar o elemento
   setTimeout(() => {
     const botao = document.getElementById(`btn-${cliente._id}`);
     if (botao) {
